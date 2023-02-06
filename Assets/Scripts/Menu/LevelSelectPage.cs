@@ -22,6 +22,11 @@ namespace Multiball.Menu
         public int Rows;
 
         /// <summary>
+        /// The level icons.
+        /// </summary>
+        public LevelIcons LevelIcons;
+
+        /// <summary>
         /// The current selected index.
         /// </summary>
         private int selectedIndex;
@@ -59,7 +64,7 @@ namespace Multiball.Menu
                 Levels[i].Highlight(false);
 
                 // Set the level id
-                Levels[i].SetLevelId(i + pageOffset);
+                Levels[i].SetLevelIdAndIcon(i + pageOffset, LevelIcons.Icons[i + pageOffset]);
 
                 // Only show levels that are the furthest level, or below
                 Levels[i].gameObject.SetActive(i + pageOffset <= furthestLevel);

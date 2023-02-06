@@ -1,8 +1,10 @@
 namespace Multiball.Menu
 {
+    using Multiball.Extensions;
     using Multiball.Input;
     using Multiball.Resources;
     using Multiball.Save;
+    using System.Linq;
     using TMPro;
     using UnityEngine;
     using UnityEngine.InputSystem;
@@ -88,6 +90,11 @@ namespace Multiball.Menu
         private MenuOptionCollection menuOptions;
 
         /// <summary>
+        /// The index of the screen resolution.
+        /// </summary>
+        private int resolutionIndex;
+
+        /// <summary>
         /// Called when the object spawns.
         /// </summary>
         private void Start()
@@ -97,6 +104,14 @@ namespace Multiball.Menu
 
             // Add an event to be called when input occurs
             InputManager.Menu.Get().actionTriggered += OnInputEvent;
+
+            // Get the current resolution
+            Resolution resolution = Screen.resolutions.Where(r => r.width == SaveManager.Data.GetResolutionWidth()
+                                                                && r.height == SaveManager.Data.GetResolutionHeight())
+                                                      .FirstOrDefault();
+
+            // Get the index of the current resolution
+            resolutionIndex = Screen.resolutions.ToList().IndexOf(resolution);
         }
 
         /// <summary>
@@ -120,7 +135,7 @@ namespace Multiball.Menu
                 PreviousMenu.SetActive(true);
                 gameObject.SetActive(false);
 
-                // todo: save
+                SaveManager.Save();
             }
         }
 
@@ -199,7 +214,30 @@ namespace Multiball.Menu
         /// <param name="value">The value to change the resolution by.</param>
         private void ChangeResolution(int value)
         {
-            // todo: resolution
+            resolutionIndex += value;
+
+            // Make sure the index is within the bounds of the array
+            if (resolutionIndex < 0)
+            {
+                resolutionIndex = Screen.resolutions.Length - 1;
+            }
+
+            if (resolutionIndex >= Screen.resolutions.Length)
+            {
+                resolutionIndex = 0;
+            }
+
+            // Get the new resolution
+            Resolution resolution = Screen.resolutions[resolutionIndex];
+
+            // Set it on the window
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+
+            // Set in in the save data
+            SaveManager.Data.Resolution = $"{resolution.width}x{resolution.height}";
+
+            // Display it on screen
+            ResolutionValue.text = SaveManager.Data.Resolution;
         }
 
         /// <summary>
@@ -238,8 +276,10 @@ namespace Multiball.Menu
         /// </summary>
         private void ChangeControllerPrompts()
         {
+            // Get the name of the controller to use as a suffix on the string
             string suffix = InputManager.GetControllerName();
 
+            // Display a back prompt with the controller's button
             BackText.text = ResourceUtil.Translate($"{BackStringId}_{suffix}");
         }
     }

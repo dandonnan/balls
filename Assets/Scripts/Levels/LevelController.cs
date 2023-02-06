@@ -121,7 +121,7 @@ namespace Multiball.Levels
                 SaveManager.Data.FurthestLevel = levelId;
             }
 
-            // todo: save
+            SaveManager.Save();
 
             // Spawn the level from the prefab list
             nextLevel = Instantiate(Levels[levelId], LevelSpawnPosition);

@@ -1643,6 +1643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 3103837733279488402, guid: 45bcf4ec97bb87040937e2171c1f405a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45bcf4ec97bb87040937e2171c1f405a, type: 3}
 --- !u!4 &7739514433380304988 stripped
@@ -1719,6 +1723,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4646391718023229108}
     m_Modifications:
+    - target: {fileID: 1402830038985962713, guid: b97f811e793296848910c77fb7ee7780, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1694349197, guid: c99b06887a9b56d45836e6333ff05cb2, type: 3}
     - target: {fileID: 4874950727012789256, guid: b97f811e793296848910c77fb7ee7780, type: 3}
       propertyPath: m_Name
       value: Exit

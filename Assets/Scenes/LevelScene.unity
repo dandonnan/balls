@@ -159,8 +159,9 @@ MonoBehaviour:
   - {fileID: 9909111534425532, guid: 5897f939a8d5d7c4b9414698e9ea6898, type: 3}
   - {fileID: 4646391718023229099, guid: 66916802efad4134dad37c82766620d3, type: 3}
   - {fileID: 8078655216467246123, guid: e4ca93d5de20868438bc78979fa87577, type: 3}
+  - {fileID: 7365187251771307265, guid: 3ff8ab5f1374f8b418e40c7f6c31e10b, type: 3}
   PauseMenu: {fileID: 1674809992}
-  DebugStartLevelId: -1
+  DebugStartLevelId: 4
 --- !u!4 &351364846
 Transform:
   m_ObjectHideFlags: 0

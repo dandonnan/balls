@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HighlightImage: {fileID: 1650969547140799091}
+  Icon: {fileID: 1650969546892814012}
 --- !u!1 &1650969547140799093
 GameObject:
   m_ObjectHideFlags: 0

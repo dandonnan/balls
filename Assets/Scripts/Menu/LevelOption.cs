@@ -16,6 +16,11 @@ namespace Multiball.Menu
         public Image HighlightImage;
 
         /// <summary>
+        /// The level icon.
+        /// </summary>
+        public Image Icon;
+
+        /// <summary>
         /// The level id.
         /// </summary>
         private int levelId;
@@ -24,9 +29,11 @@ namespace Multiball.Menu
         /// Set the level id.
         /// </summary>
         /// <param name="levelId">The level id.</param>
-        public void SetLevelId(int levelId)
+        /// <param name="icon">The level icon.</param>
+        public void SetLevelIdAndIcon(int levelId, Sprite icon)
         {
             this.levelId = levelId;
+            Icon.sprite = icon;
         }
 
         /// <summary>
