@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Main Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Main
+  m_TableCollectionNameGuidString: ac2e313ce74eebb41b3c404cd18d51ac
+  m_Entries:
+  - m_Id: 9668763648
+    m_Key: GameName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13322002432
+    m_Key: Copyright
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15939248128
+    m_Key: MenuStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19428909056
+    m_Key: MenuLevels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 147812360192
+    m_Key: MenuContinue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 150899367936
+    m_Key: MenuOptions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 152409317376
+    m_Key: MenuQuit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153113960448
+    m_Key: PauseResume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153751494656
+    m_Key: OptionsMusic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 154384834560
+    m_Key: OptionsSound
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155026563072
+    m_Key: OptionsResolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155630542848
+    m_Key: OptionsFullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 386996740096
+    m_Key: OptionsYes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 387734937600
+    m_Key: OptionsNo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 388473135104
+    m_Key: LevelSelect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 388938702848
+    m_Key: ControlsTabLeft_Xbox
+    m_Metadata:
+      m_Items: []
+  - m_Id: 489404866560
+    m_Key: ControlsTabRight_Xbox
+    m_Metadata:
+      m_Items: []
+  - m_Id: 490080149504
+    m_Key: ControlsTabLeft_PlayStation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 490780598272
+    m_Key: ControlsTabRight_PlayStation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 527560450048
+    m_Key: ControlsTabLeft_Switch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 528898433024
+    m_Key: ControlsTabRight_Switch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 529569521664
+    m_Key: ControlsTabLeft_PC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 554873757696
+    m_Key: ControlsTabRight_PC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 590321659256832
+    m_Key: ControlsBack_Xbox
+    m_Metadata:
+      m_Items: []
+  - m_Id: 590323777380352
+    m_Key: ControlsBack_PlayStation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 590482124939264
+    m_Key: ControlsBack_Switch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 590482829582336
+    m_Key: ControlsBack_PC
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2499452824908464152
+  references:
+    version: 2
+    RefIds:
+    - rid: 2499452824908464152
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1675549319499
