@@ -73,6 +73,22 @@ namespace Multiball.Menu
         /// </summary>
         public OptionsMenu OptionsMenu;
 
+        [Header("Audio")]
+        /// <summary>
+        /// The name of the sound effect when moving up.
+        /// </summary>
+        public string SoundMoveUp;
+
+        /// <summary>
+        /// The name of the sound effect when moving down.
+        /// </summary>
+        public string SoundMoveDown;
+
+        /// <summary>
+        /// The name of the sound effect when selecting an option.
+        /// </summary>
+        public string SoundConfirm;
+
         /// <summary>
         /// The options on the main menu.
         /// </summary>
@@ -122,6 +138,7 @@ namespace Multiball.Menu
         private void SetupOptions()
         {
             menuOptions = new MenuOptionCollection();
+            menuOptions.SetSounds(SoundMoveUp, SoundMoveDown, SoundConfirm);
 
             // If the player has played before
             if (SaveManager.Data.LatestLevel > -1)

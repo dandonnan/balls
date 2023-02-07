@@ -2,6 +2,7 @@ namespace Multiball.Menu
 {
     using System;
     using System.Collections.Generic;
+    using Multiball.Audio;
     using Multiball.Extensions;
     using Multiball.Input;
     using UnityEngine;
@@ -23,12 +24,43 @@ namespace Multiball.Menu
         private int currentOption;
 
         /// <summary>
+        /// The name of the sound effect to play when moving up.
+        /// </summary>
+        private string soundMoveUp;
+
+        /// <summary>
+        /// The name of the sound effect to play when moving down.
+        /// </summary>
+        private string soundMoveDown;
+
+        /// <summary>
+        /// The name of the sound effect to play when selecting an option.
+        /// </summary>
+        private string soundConfirm;
+
+        /// <summary>
         /// Create an empty collection.
         /// </summary>
         public MenuOptionCollection()
         {
             options = new List<MenuOption>();
             currentOption = 0;
+            soundMoveUp = string.Empty;
+            soundMoveDown = string.Empty;
+            soundConfirm = string.Empty;
+        }
+
+        /// <summary>
+        /// Set the sound effects.
+        /// </summary>
+        /// <param name="moveUp">The effect when moving up.</param>
+        /// <param name="moveDown">The effect when moving down.</param>
+        /// <param name="confirm">The effect when selecting an option.</param>
+        public void SetSounds(string moveUp, string moveDown, string confirm)
+        {
+            soundMoveUp = moveUp;
+            soundMoveDown = moveDown;
+            soundConfirm = confirm;
         }
 
         /// <summary>
@@ -105,6 +137,7 @@ namespace Multiball.Menu
             // If the accept input is pressed, select the option
             if (InputManager.Menu.Accept.WasPressedThisFrame())
             {
+                AudioManager.PlaySound(soundConfirm);
                 options[currentOption].Select();
             }
         }
@@ -122,6 +155,16 @@ namespace Multiball.Menu
             currentOption = forward ?
                                 currentOption == options.Count - 1 ? 0 : currentOption + 1
                                 : currentOption == 0 ? options.Count - 1 : currentOption - 1;
+
+            // Play sound effects
+            if (forward)
+            {
+                AudioManager.PlaySound(soundMoveDown);
+            }
+            else
+            {
+                AudioManager.PlaySound(soundMoveUp);
+            }
 
             // Highlight the new option
             options[currentOption].Highlight();

@@ -109,6 +109,8 @@ MonoBehaviour:
   JumpHeight: 275
   JumpCooldown: 0.2
   Colour: 0
+  JumpSound: BallJump
+  ExitSound: BallExit
 --- !u!50 &6717120984691460182
 Rigidbody2D:
   serializedVersion: 4

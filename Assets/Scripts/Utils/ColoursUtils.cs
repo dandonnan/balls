@@ -62,15 +62,19 @@ namespace Multiball.Utils
                     break;
 
                 case Colours.Green:
-                    newColour = Color.green;
+                    newColour = new Color(0.78f, 0.92f, 0.33f);
                     break;
 
                 case Colours.Yellow:
-                    newColour = Color.yellow;
+                    newColour = new Color(1, 0.98f, 0.66f);
                     break;
 
                 case Colours.Grey:
                     newColour = new Color(0.8f, 0.8f, 0.8f);
+                    break;
+
+                case Colours.Orange:
+                    newColour = new Color(1, 0.72f, 0.53f);
                     break;
 
                 case Colours.White:

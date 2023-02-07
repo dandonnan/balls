@@ -1,5 +1,6 @@
 namespace Multiball.Menu
 {
+    using Multiball.Audio;
     using Multiball.Input;
     using Multiball.Resources;
     using Multiball.Save;
@@ -76,6 +77,27 @@ namespace Multiball.Menu
         /// </summary>
         public GameObject PreviousMenu;
 
+        [Header("Audio")]
+        /// <summary>
+        /// The name of the sound effect when moving up.
+        /// </summary>
+        public string SoundMoveUp;
+
+        /// <summary>
+        /// The name of the sound effect when moving down.
+        /// </summary>
+        public string SoundMoveDown;
+
+        /// <summary>
+        /// The name of the sound effect when selecting an option.
+        /// </summary>
+        public string SoundConfirm;
+
+        /// <summary>
+        /// The name of the sound effect when returning to the previous menu.
+        /// </summary>
+        public string SoundBack;
+
         /// <summary>
         /// The current page.
         /// </summary>
@@ -92,6 +114,7 @@ namespace Multiball.Menu
         private void Start()
         {
             SetTabDisplay();
+            PageContainer.SetSound(SoundMoveDown);
             PageContainer.Setup(currentPage, LevelsPerPage);
 
             // Set the max page the player can change to based on their furthest level
@@ -125,18 +148,21 @@ namespace Multiball.Menu
             // Change to the previous tab
             if (InputManager.Menu.TabLeft.WasPressedThisFrame() && currentPage > 0)
             {
+                AudioManager.PlaySound(SoundMoveUp);
                 ChangeTab(currentPage-1);
             }
 
             // Change to the next tab
             if (InputManager.Menu.TabRight.WasPressedThisFrame() && currentPage < maxPage)
             {
+                AudioManager.PlaySound(SoundMoveDown);
                 ChangeTab(currentPage + 1);
             }
 
             // Go to the previous menu
             if (InputManager.Menu.Decline.WasPressedThisFrame())
             {
+                AudioManager.PlaySound(SoundBack);
                 PreviousMenu.SetActive(true);
                 gameObject.SetActive(false);
             }

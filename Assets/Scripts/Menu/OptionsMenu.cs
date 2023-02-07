@@ -1,5 +1,6 @@
 namespace Multiball.Menu
 {
+    using Multiball.Audio;
     using Multiball.Extensions;
     using Multiball.Input;
     using Multiball.Resources;
@@ -91,6 +92,27 @@ namespace Multiball.Menu
         /// </summary>
         public GameObject PreviousMenu;
 
+        [Header("Audio")]
+        /// <summary>
+        /// The name of the sound effect when moving up.
+        /// </summary>
+        public string SoundMoveUp;
+
+        /// <summary>
+        /// The name of the sound effect when moving down.
+        /// </summary>
+        public string SoundMoveDown;
+
+        /// <summary>
+        /// The name of the sound effect when selecting an option.
+        /// </summary>
+        public string SoundConfirm;
+
+        /// <summary>
+        /// The name of the sound effect when returning to the previous menu.
+        /// </summary>
+        public string SoundBack;
+
         /// <summary>
         /// The options to display.
         /// </summary>
@@ -152,6 +174,8 @@ namespace Multiball.Menu
             // If the back button was pressed, return to the previous menu
             if (InputManager.Menu.Decline.WasPressedThisFrame())
             {
+                AudioManager.PlaySound(SoundBack);
+
                 PreviousMenu.SetActive(true);
                 gameObject.SetActive(false);
 
@@ -165,6 +189,7 @@ namespace Multiball.Menu
         private void SetupOptions()
         {
             menuOptions = new MenuOptionCollection();
+            menuOptions.SetSounds(SoundMoveUp, SoundMoveDown, SoundConfirm);
 
             // Add options with the UI background image, and the method to call when the value is changed
             menuOptions.Add("Sound", ChangeSoundVolume, SoundBackground);
@@ -198,7 +223,8 @@ namespace Multiball.Menu
 
             SoundValue.text = SaveManager.Data.SoundVolume.ToString();
 
-            // todo: change audio levels
+            // Play a sound
+            PlayValueChangedSound(value);
         }
 
         /// <summary>
@@ -213,7 +239,10 @@ namespace Multiball.Menu
 
             MusicValue.text = SaveManager.Data.MusicVolume.ToString();
 
-            // todo: change audio levels
+            AudioManager.SetMusicVolume(SaveManager.Data.MusicVolume);
+
+            // Play a sound
+            PlayValueChangedSound(value);
         }
 
         /// <summary>
@@ -227,6 +256,8 @@ namespace Multiball.Menu
             SetFullscreenValue();
 
             Screen.fullScreenMode = SaveManager.Data.Fullscreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
+
+            AudioManager.PlaySound(SoundMoveUp);
         }
 
         /// <summary>
@@ -259,6 +290,9 @@ namespace Multiball.Menu
 
             // Display it on screen
             ResolutionValue.text = SaveManager.Data.Resolution;
+
+            // Play a sound
+            PlayValueChangedSound(value);
         }
 
         /// <summary>
@@ -287,6 +321,25 @@ namespace Multiball.Menu
 
             // Save the code
             SaveManager.Data.LanguageCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+
+            // Play a sound
+            PlayValueChangedSound(value);
+        }
+
+        /// <summary>
+        /// Play a sound when a value has changed.
+        /// </summary>
+        /// <param name="value">The value</param>
+        private void PlayValueChangedSound(int value)
+        {
+            if (value > 0)
+            {
+                AudioManager.PlaySound(SoundMoveDown);
+            }
+            else
+            {
+                AudioManager.PlaySound(SoundMoveUp);
+            }
         }
 
         /// <summary>

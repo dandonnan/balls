@@ -1,5 +1,6 @@
 namespace Multiball.Menu
 {
+    using Multiball.Audio;
     using Multiball.Input;
     using Multiball.Levels;
     using UnityEngine;
@@ -33,6 +34,27 @@ namespace Multiball.Menu
         /// </summary>
         public OptionsMenu OptionsMenu;
 
+        [Header("Audio")]
+        /// <summary>
+        /// The name of the sound effect when moving up.
+        /// </summary>
+        public string SoundMoveUp;
+
+        /// <summary>
+        /// The name of the sound effect when moving down.
+        /// </summary>
+        public string SoundMoveDown;
+
+        /// <summary>
+        /// The name of the sound effect when selecting an option.
+        /// </summary>
+        public string SoundConfirm;
+
+        /// <summary>
+        /// The name of the sound effect when returning to the previous menu.
+        /// </summary>
+        public string SoundBack;
+
         /// <summary>
         /// The options to display in the pause menu.
         /// </summary>
@@ -56,6 +78,7 @@ namespace Multiball.Menu
             // If pause is pressed, then resume the game
             if (InputManager.Game.Pause.WasPressedThisFrame())
             {
+                AudioManager.PlaySound(SoundBack);
                 Resume();
             }
         }
@@ -66,6 +89,7 @@ namespace Multiball.Menu
         private void SetupOptions()
         {
             menuOptions = new MenuOptionCollection();
+            menuOptions.SetSounds(SoundMoveUp, SoundMoveDown, SoundConfirm);
 
             // Add each option, with the UI image and the method to call when selected
             menuOptions.Add("Resume", Resume, ResumeBackground);

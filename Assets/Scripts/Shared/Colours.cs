@@ -12,5 +12,6 @@ namespace Multiball.Shared
         Green = 4,
         Yellow = 5,
         Grey = 6,
+        Orange = 7,
     }
 }

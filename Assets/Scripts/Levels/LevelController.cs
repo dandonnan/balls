@@ -1,5 +1,6 @@
 namespace Multiball.Levels
 {
+    using Multiball.Audio;
     using Multiball.Input;
     using Multiball.Menu;
     using Multiball.Save;
@@ -32,6 +33,11 @@ namespace Multiball.Levels
         /// The pause menu.
         /// </summary>
         public PauseMenu PauseMenu;
+
+        /// <summary>
+        /// The sound to play when pausing.
+        /// </summary>
+        public string PauseSound;
 
         public int DebugStartLevelId;
 
@@ -75,6 +81,7 @@ namespace Multiball.Levels
             // If pause is press, pause the game and show the menu
             if (InputManager.Game.Pause.WasPressedThisFrame() && LevelManager.Paused == false)
             {
+                AudioManager.PlaySound(PauseSound);
                 LevelManager.Pause();
                 PauseMenu.gameObject.SetActive(true);
             }

@@ -1764,6 +1764,10 @@ MonoBehaviour:
   BackStringId: ControlsBack
   BackText: {fileID: 1507210014884315612}
   PreviousMenu: {fileID: 0}
+  SoundMoveUp: MenuMove1
+  SoundMoveDown: MenuMove2
+  SoundConfirm: MenuConfirm
+  SoundBack: MenuBack
 --- !u!1 &5473129854459441051
 GameObject:
   m_ObjectHideFlags: 0

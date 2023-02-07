@@ -6,7 +6,6 @@ written specifically for this resides in Assets/Scripts.
 
 Right now, this is a WIP. The following needs sorting:
  - Creation of levels (5 are implemented, up to 90 are planned)
- - Adding audio
  - The level select screen has some bugs in it as I tried to use numbers and that was a mistake
 
 ## Scenes

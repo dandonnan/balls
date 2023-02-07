@@ -1,5 +1,6 @@
 namespace Multiball.Menu
 {
+    using Multiball.Audio;
     using Multiball.Extensions;
     using Multiball.Input;
     using Multiball.Save;
@@ -40,6 +41,20 @@ namespace Multiball.Menu
         /// The index offset that the page starts at.
         /// </summary>
         private int pageOffset;
+
+        /// <summary>
+        /// The name of the sound effect to play when moving.
+        /// </summary>
+        private string soundMoving;
+
+        /// <summary>
+        /// Set the name of the sound effect to play.
+        /// </summary>
+        /// <param name="name">The name of the sound effect.</param>
+        public void SetSound(string name)
+        {
+            soundMoving = name;
+        }
 
         /// <summary>
         /// Setup the page.
@@ -85,6 +100,7 @@ namespace Multiball.Menu
             // If the move input was pressed then handle movement
             if (InputManager.Menu.Move.WasPressedThisFrame(out Vector2 movement))
             {
+                AudioManager.PlaySound(soundMoving);
                 HandleHorizontalInput(movement);
                 HandleVerticalInput(movement);
             }

@@ -1,5 +1,6 @@
 namespace Multiball.Levels
 {
+    using Multiball.Audio;
     using Multiball.Extensions;
     using Multiball.Input;
     using Multiball.Shared;
@@ -53,6 +54,17 @@ namespace Multiball.Levels
         /// The colour of the ball.
         /// </summary>
         public Colours Colour;
+
+        [Header("Audio")]
+        /// <summary>
+        /// The sound to play when jumping.
+        /// </summary>
+        public string JumpSound;
+
+        /// <summary>
+        /// The sound to play when reaching the exit.
+        /// </summary>
+        public string ExitSound;
 
         /// <summary>
         /// Whether the ball can jump.
@@ -257,6 +269,9 @@ namespace Multiball.Levels
 
                 // Add a jump force to the rigidbody
                 rigidbody2d.AddForce(new Vector2(0, jumpHeight));
+
+                // Play a jump sound
+                AudioManager.PlaySound(JumpSound);
             }
         }
 
@@ -310,6 +325,9 @@ namespace Multiball.Levels
         /// </summary>
         private void ReachedExit()
         {
+            // Play a sound
+            AudioManager.PlaySound(ExitSound);
+
             // Invert the gravity if required - to stop balls floating away
             InvertGravityWhenUpsideDown();
 

@@ -1,5 +1,6 @@
 namespace Multiball
 {
+    using Multiball.Audio;
     using Multiball.Input;
     using Multiball.Levels;
     using Multiball.Save;
@@ -19,6 +20,7 @@ namespace Multiball
             InputManager.Initialise();
             SaveManager.Initialise();
             LevelManager.Initialise();
+            AudioManager.Initialise();
         }
     }
 }
