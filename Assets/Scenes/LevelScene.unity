@@ -161,7 +161,7 @@ MonoBehaviour:
   - {fileID: 8078655216467246123, guid: e4ca93d5de20868438bc78979fa87577, type: 3}
   - {fileID: 7365187251771307265, guid: 3ff8ab5f1374f8b418e40c7f6c31e10b, type: 3}
   PauseMenu: {fileID: 1674809992}
-  DebugStartLevelId: 4
+  DebugStartLevelId: 0
 --- !u!4 &351364846
 Transform:
   m_ObjectHideFlags: 0

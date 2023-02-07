@@ -8,6 +8,8 @@ namespace Multiball.Menu
     using TMPro;
     using UnityEngine;
     using UnityEngine.InputSystem;
+    using UnityEngine.Localization;
+    using UnityEngine.Localization.Settings;
     using UnityEngine.UI;
 
     /// <summary>
@@ -35,6 +37,11 @@ namespace Multiball.Menu
         /// The background image for the resolution option.
         /// </summary>
         public Image ResolutionBackground;
+
+        /// <summary>
+        /// The background image for the language option.
+        /// </summary>
+        public Image LanguageBackground;
 
         [Header("Values")]
         /// <summary>
@@ -95,6 +102,11 @@ namespace Multiball.Menu
         private int resolutionIndex;
 
         /// <summary>
+        /// The index of the current locale.
+        /// </summary>
+        private int localeIndex;
+
+        /// <summary>
         /// Called when the object spawns.
         /// </summary>
         private void Start()
@@ -102,8 +114,10 @@ namespace Multiball.Menu
             SetupOptions();
             SetValues();
 
-            // Add an event to be called when input occurs
+            // Add events to be called when input occurs or the locale is changed
             InputManager.Menu.Get().actionTriggered += OnInputEvent;
+
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
 
             // Get the current resolution
             Resolution resolution = Screen.resolutions.Where(r => r.width == SaveManager.Data.GetResolutionWidth()
@@ -112,6 +126,9 @@ namespace Multiball.Menu
 
             // Get the index of the current resolution
             resolutionIndex = Screen.resolutions.ToList().IndexOf(resolution);
+
+            // Get the index of the current locale
+            localeIndex = LocalizationSettings.AvailableLocales.Locales.IndexOf(LocalizationSettings.SelectedLocale);
         }
 
         /// <summary>
@@ -119,7 +136,10 @@ namespace Multiball.Menu
         /// </summary>
         private void OnDestroy()
         {
+            // Remove events when actions are performed
             InputManager.Menu.Get().actionTriggered -= OnInputEvent;
+
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
         }
 
         /// <summary>
@@ -151,6 +171,7 @@ namespace Multiball.Menu
             menuOptions.Add("Music", ChangeMusicVolume, MusicBackground);
             menuOptions.Add("Fullscreen", ChangeFullscreen, FullscreenBackground);
             menuOptions.Add("Resolution", ChangeResolution, ResolutionBackground);
+            menuOptions.Add("Language", ChangeLanguage, LanguageBackground);
         }
 
         /// <summary>
@@ -160,8 +181,9 @@ namespace Multiball.Menu
         {
             SoundValue.text = SaveManager.Data.SoundVolume.ToString();
             MusicValue.text = SaveManager.Data.MusicVolume.ToString();
-            FullscreenValue.text = SaveManager.Data.Fullscreen ? ResourceUtil.Translate(YesStringId) : ResourceUtil.Translate(NoStringId);
             ResolutionValue.text = SaveManager.Data.Resolution;
+
+            SetFullscreenValue();
         }
 
         /// <summary>
@@ -202,8 +224,7 @@ namespace Multiball.Menu
         {
             SaveManager.Data.Fullscreen = !SaveManager.Data.Fullscreen;
 
-            // Set the text to Yes or No
-            FullscreenValue.text = SaveManager.Data.Fullscreen ? ResourceUtil.Translate(YesStringId) : ResourceUtil.Translate(NoStringId);
+            SetFullscreenValue();
 
             Screen.fullScreenMode = SaveManager.Data.Fullscreen ? FullScreenMode.ExclusiveFullScreen : FullScreenMode.Windowed;
         }
@@ -241,6 +262,34 @@ namespace Multiball.Menu
         }
 
         /// <summary>
+        /// Change the language.
+        /// </summary>
+        /// <param name="value">The value to change the language by.</param>
+        private void ChangeLanguage(int value)
+        {
+            localeIndex += value;
+
+            int totalLocales = LocalizationSettings.AvailableLocales.Locales.Count;
+
+            // Make sure the locale index is inside the list
+            if (localeIndex < 0)
+            {
+                localeIndex = totalLocales - 1;
+            }
+
+            if (localeIndex >= totalLocales)
+            {
+                localeIndex = 0;
+            }
+
+            // Set the locale from the new index
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeIndex];
+
+            // Save the code
+            SaveManager.Data.LanguageCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+        }
+
+        /// <summary>
         /// Wrap the volume within the allowed bounds.
         /// </summary>
         /// <param name="volume">The current volume.</param>
@@ -272,6 +321,24 @@ namespace Multiball.Menu
         }
 
         /// <summary>
+        /// An event called when the local is changed.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        private void OnLocaleChanged(Locale locale)
+        {
+            SetFullscreenValue();
+        }
+
+        /// <summary>
+        /// Set the value of the fullscreen option.
+        /// </summary>
+        private void SetFullscreenValue()
+        {
+            // Set the text to Yes or No
+            FullscreenValue.text = SaveManager.Data.Fullscreen ? StringUtils.Translate(YesStringId) : StringUtils.Translate(NoStringId);
+        }
+
+        /// <summary>
         /// Change the prompts for the controller.
         /// </summary>
         private void ChangeControllerPrompts()
@@ -280,7 +347,7 @@ namespace Multiball.Menu
             string suffix = InputManager.GetControllerName();
 
             // Display a back prompt with the controller's button
-            BackText.text = ResourceUtil.Translate($"{BackStringId}_{suffix}");
+            BackText.text = StringUtils.Translate($"{BackStringId}_{suffix}");
         }
     }
 }

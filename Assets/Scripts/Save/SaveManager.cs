@@ -2,6 +2,9 @@ namespace Multiball.Save
 {
     using UnityEngine;
     using Newtonsoft.Json;
+    using UnityEngine.Localization.Settings;
+    using System.Linq;
+    using UnityEngine.Localization;
 
     /// <summary>
     /// The manager for save data.
@@ -86,7 +89,25 @@ namespace Multiball.Save
                 data = JsonConvert.DeserializeObject<SaveData>(storedData);
             }
 
+            SetLanguage(data.LanguageCode);
+
             return data;
+        }
+
+        /// <summary>
+        /// Set the language based on the code.
+        /// </summary>
+        /// <param name="code"></param>
+        public static void SetLanguage(string code)
+        {
+            Locale locale = LocalizationSettings.AvailableLocales.Locales.FirstOrDefault(l => l.Identifier.Code == code);
+
+            if (locale != null)
+            {
+                locale = LocalizationSettings.AvailableLocales.GetLocale("en");
+            }
+
+            LocalizationSettings.SelectedLocale = locale;
         }
     }
 }

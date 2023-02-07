@@ -5,6 +5,8 @@ namespace Multiball.Menu
     using Multiball.Save;
     using TMPro;
     using UnityEngine;
+    using UnityEngine.Localization;
+    using UnityEngine.Localization.Settings;
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
@@ -77,11 +79,33 @@ namespace Multiball.Menu
         private MenuOptionCollection menuOptions;
 
         /// <summary>
+        /// The string id for the first option.
+        /// </summary>
+        private string option1Id;
+
+        /// <summary>
+        /// The string id for the second option.
+        /// </summary>
+        private string option2Id;
+
+        /// <summary>
         /// Called when the object spawns.
         /// </summary>
         private void Start()
         {
             SetupOptions();
+
+            // Add an event for when the locale is changed
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        }
+
+        /// <summary>
+        /// Called when the object is destroyed.
+        /// </summary>
+        private void OnDestroy()
+        {
+            // Remove the locale changed event
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
         }
 
         /// <summary>
@@ -104,7 +128,7 @@ namespace Multiball.Menu
             {
                 // Add the Continue option
                 menuOptions.Add("Continue", LoadLastPlayedLevel, Option1Background);
-                Option1Text.text = ResourceUtil.Translate(ContinueStringId);
+                option1Id = ContinueStringId;
             }
             else
             {
@@ -113,14 +137,14 @@ namespace Multiball.Menu
                 {
                     // Display Start as the second option, and disable the first option
                     menuOptions.Add("Start", StartNewGame, Option2Background);
-                    Option2Text.text = ResourceUtil.Translate(StartStringId);
                     Option1Background.gameObject.SetActive(false);
+                    option2Id = StartStringId;
                 }
                 else
                 {
                     // If the player has played before, but has completed all levels, add Start to the top
                     menuOptions.Add("Start", StartNewGame, Option1Background);
-                    Option1Text.text = ResourceUtil.Translate(StartStringId);
+                    option1Id = StartStringId;
                 }
             }
 
@@ -129,8 +153,10 @@ namespace Multiball.Menu
             {
                 // Add the Level Select option
                 menuOptions.Add("Levels", OpenLevelSelect, Option2Background);
-                Option2Text.text = ResourceUtil.Translate(LevelStringId);
+                option2Id = LevelStringId;
             }
+
+            SetOptionStrings();
 
             // Always show Options and Quit
             menuOptions.Add("Options", DisplayOptionsMenu, OptionsBackground);
@@ -188,6 +214,24 @@ namespace Multiball.Menu
         private void QuitGame()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Called when the locale is changed.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        private void OnLocaleChanged(Locale locale)
+        {
+            SetOptionStrings();
+        }
+
+        /// <summary>
+        /// Set strings on the options, based on ids that have been set.
+        /// </summary>
+        private void SetOptionStrings()
+        {
+            Option1Text.text = string.IsNullOrWhiteSpace(option1Id) ? string.Empty : StringUtils.Translate(option1Id);
+            Option2Text.text = string.IsNullOrWhiteSpace(option2Id) ? string.Empty : StringUtils.Translate(option2Id);
         }
     }
 }

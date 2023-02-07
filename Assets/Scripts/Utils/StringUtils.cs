@@ -3,9 +3,9 @@ namespace Multiball.Resources
     using UnityEngine.Localization.Settings;
 
     /// <summary>
-    /// Utilities for Resources.
+    /// Utilities for strings.
     /// </summary>
-    internal class ResourceUtil
+    internal class StringUtils
     {
         /// <summary>
         /// Get a localised string from the given key.

@@ -10,72 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Main_en
+  m_Name: Main_it
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
+    m_Code: it
   m_SharedData: {fileID: 11400000, guid: ac2e313ce74eebb41b3c404cd18d51ac, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 9668763648
-    m_Localized: Balls (I Guess?)
-    m_Metadata:
-      m_Items: []
   - m_Id: 13322002432
     m_Localized: "\xA9 2023 Dan Donnan"
     m_Metadata:
       m_Items: []
-  - m_Id: 15939248128
-    m_Localized: Start
-    m_Metadata:
-      m_Items: []
   - m_Id: 19428909056
-    m_Localized: Levels
+    m_Localized: Livelli
     m_Metadata:
       m_Items: []
   - m_Id: 147812360192
-    m_Localized: Continue
+    m_Localized: "Continua\r"
     m_Metadata:
       m_Items: []
   - m_Id: 150899367936
-    m_Localized: Options
+    m_Localized: "Opzioni\r"
     m_Metadata:
       m_Items: []
   - m_Id: 152409317376
-    m_Localized: Quit
+    m_Localized: "Esci\r"
     m_Metadata:
       m_Items: []
-  - m_Id: 153113960448
-    m_Localized: Resume
+  - m_Id: 590321659256832
+    m_Localized: (B) - Indietro
     m_Metadata:
       m_Items: []
-  - m_Id: 153751494656
-    m_Localized: Music
+  - m_Id: 590323777380352
+    m_Localized: (O) - Indietro
     m_Metadata:
       m_Items: []
-  - m_Id: 154384834560
-    m_Localized: Sounds
+  - m_Id: 590482124939264
+    m_Localized: (A) - Indietro
     m_Metadata:
       m_Items: []
-  - m_Id: 155026563072
-    m_Localized: Resolution
-    m_Metadata:
-      m_Items: []
-  - m_Id: 155630542848
-    m_Localized: Fullscreen
-    m_Metadata:
-      m_Items: []
-  - m_Id: 386996740096
-    m_Localized: Yes
-    m_Metadata:
-      m_Items: []
-  - m_Id: 387734937600
-    m_Localized: No
-    m_Metadata:
-      m_Items: []
-  - m_Id: 388473135104
-    m_Localized: Choose Level
+  - m_Id: 590482829582336
+    m_Localized: (Esc) - Indietro
     m_Metadata:
       m_Items: []
   - m_Id: 554873757696
@@ -94,44 +70,68 @@ MonoBehaviour:
     m_Localized: L
     m_Metadata:
       m_Items: []
-  - m_Id: 490080149504
-    m_Localized: L1
-    m_Metadata:
-      m_Items: []
   - m_Id: 490780598272
     m_Localized: R1
     m_Metadata:
       m_Items: []
-  - m_Id: 388938702848
-    m_Localized: LB
+  - m_Id: 490080149504
+    m_Localized: L1
     m_Metadata:
       m_Items: []
   - m_Id: 489404866560
     m_Localized: RB
     m_Metadata:
       m_Items: []
-  - m_Id: 590321659256832
-    m_Localized: (B) - Back
+  - m_Id: 388938702848
+    m_Localized: LB
     m_Metadata:
       m_Items: []
-  - m_Id: 590323777380352
-    m_Localized: (O) - Back
+  - m_Id: 387734937600
+    m_Localized: No
     m_Metadata:
       m_Items: []
-  - m_Id: 590482124939264
-    m_Localized: (A) - Back
+  - m_Id: 386996740096
+    m_Localized: "S\xEC"
     m_Metadata:
       m_Items: []
-  - m_Id: 590482829582336
-    m_Localized: (Esc) - Back
+  - m_Id: 154384834560
+    m_Localized: Effetti sonori
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153751494656
+    m_Localized: Musica
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155026563072
+    m_Localized: Risoluzione
+    m_Metadata:
+      m_Items: []
+  - m_Id: 155630542848
+    m_Localized: Schermo intero
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15939248128
+    m_Localized: Inizio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 153113960448
+    m_Localized: Continua
+    m_Metadata:
+      m_Items: []
+  - m_Id: 388473135104
+    m_Localized: Seleziona livello
     m_Metadata:
       m_Items: []
   - m_Id: 740436952850432
-    m_Localized: Language
+    m_Localized: Lingua
     m_Metadata:
       m_Items: []
   - m_Id: 740619354742784
-    m_Localized: English
+    m_Localized: Italiano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9668763648
+    m_Localized: Balls (I Guess?)
     m_Metadata:
       m_Items: []
   references:

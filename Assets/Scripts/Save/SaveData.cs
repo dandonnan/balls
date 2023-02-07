@@ -51,6 +51,11 @@ namespace Multiball.Save
         public bool Fullscreen { get; set; }
 
         /// <summary>
+        /// The language code.
+        /// </summary>
+        public string LanguageCode { get; set; }
+
+        /// <summary>
         /// Set the data to the defaults.
         /// </summary>
         public SaveData()
@@ -61,6 +66,7 @@ namespace Multiball.Save
             MusicVolume = DefaultVolume;
             Resolution = "1280x720";
             Fullscreen = false;
+            LanguageCode = "en";
         }
     }
 }

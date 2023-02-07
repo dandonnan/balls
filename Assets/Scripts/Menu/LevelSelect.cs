@@ -186,9 +186,9 @@ namespace Multiball.Menu
         {
             string suffix = InputManager.GetControllerName();
 
-            TabLeftText.text = ResourceUtil.Translate($"{TabLeftPrefixId}_{suffix}");
-            TabRightText.text = ResourceUtil.Translate($"{TabRightPrefixId}_{suffix}");
-            BackText.text = ResourceUtil.Translate($"{BackPrefixId}_{suffix}");
+            TabLeftText.text = StringUtils.Translate($"{TabLeftPrefixId}_{suffix}");
+            TabRightText.text = StringUtils.Translate($"{TabRightPrefixId}_{suffix}");
+            BackText.text = StringUtils.Translate($"{BackPrefixId}_{suffix}");
         }
     }
 }
