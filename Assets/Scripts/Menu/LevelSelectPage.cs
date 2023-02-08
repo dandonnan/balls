@@ -3,7 +3,9 @@ namespace Multiball.Menu
     using Multiball.Audio;
     using Multiball.Extensions;
     using Multiball.Input;
+    using Multiball.Levels;
     using Multiball.Save;
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -28,6 +30,11 @@ namespace Multiball.Menu
         public LevelIcons LevelIcons;
 
         /// <summary>
+        /// The screen fade control.
+        /// </summary>
+        public ScreenFade ScreenFader;
+
+        /// <summary>
         /// The current selected index.
         /// </summary>
         private int selectedIndex;
@@ -46,6 +53,11 @@ namespace Multiball.Menu
         /// The name of the sound effect to play when moving.
         /// </summary>
         private string soundMoving;
+
+        /// <summary>
+        /// Whether or not a level load has been triggered.
+        /// </summary>
+        private bool loadTriggered;
 
         /// <summary>
         /// Set the name of the sound effect to play.
@@ -97,18 +109,26 @@ namespace Multiball.Menu
         /// </summary>
         public void HandleInput()
         {
-            // If the move input was pressed then handle movement
-            if (InputManager.Menu.Move.WasPressedThisFrame(out Vector2 movement))
+            // Only allow input until a level is being loaded
+            if (loadTriggered == false)
             {
-                AudioManager.PlaySound(soundMoving);
-                HandleHorizontalInput(movement);
-                HandleVerticalInput(movement);
-            }
+                // If the move input was pressed then handle movement
+                if (InputManager.Menu.Move.WasPressedThisFrame(out Vector2 movement))
+                {
+                    AudioManager.PlaySound(soundMoving);
+                    HandleHorizontalInput(movement);
+                    HandleVerticalInput(movement);
+                }
 
-            // If accept was pressed, load the level
-            if (InputManager.Menu.Accept.WasPressedThisFrame())
-            {
-                Levels[selectedIndex].LoadLevel();
+                // If accept was pressed, load the level
+                if (InputManager.Menu.Accept.WasPressedThisFrame())
+                {
+                    loadTriggered = true;
+
+                    ScreenFader.FadeOut(stayFaded: true);
+
+                    ScreenFader.ScreenFaded += OnScreenFaded;
+                }
             }
         }
 
@@ -218,6 +238,16 @@ namespace Multiball.Menu
 
             // Set the highlight on the selected level
             Levels[selectedIndex].Highlight();
+        }
+
+        /// <summary>
+        /// An event when the screen is faded.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="args">The event arguments.</param>
+        private void OnScreenFaded(object sender, EventArgs args)
+        {
+            Levels[selectedIndex].LoadLevel();
         }
     }
 }

@@ -3,6 +3,7 @@ namespace Multiball.Menu
     using Multiball.Levels;
     using Multiball.Resources;
     using Multiball.Save;
+    using System;
     using TMPro;
     using UnityEngine;
     using UnityEngine.Localization;
@@ -45,6 +46,11 @@ namespace Multiball.Menu
         /// The background image for the quit option.
         /// </summary>
         public Image QuitBackground;
+
+        /// <summary>
+        /// The screen fade control.
+        /// </summary>
+        public ScreenFade ScreenFader;
 
         [Header("Strings")]
         /// <summary>
@@ -103,6 +109,11 @@ namespace Multiball.Menu
         /// The string id for the second option.
         /// </summary>
         private string option2Id;
+
+        /// <summary>
+        /// The id of the level to load.
+        /// </summary>
+        private int levelToLoadId;
 
         /// <summary>
         /// Called when the object spawns.
@@ -202,9 +213,11 @@ namespace Multiball.Menu
         /// <param name="levelId">The id of the level.</param>
         private void LoadIntoGame(int levelId)
         {
-            LevelManager.Pause(false);
-            LevelManager.SetLevelId(levelId);
-            SceneManager.LoadScene("LevelScene");
+            ScreenFader.FadeOut(stayFaded: true);
+
+            levelToLoadId = levelId;
+
+            ScreenFader.ScreenFaded += OnScreenFaded;
         }
 
         /// <summary>
@@ -249,6 +262,18 @@ namespace Multiball.Menu
         {
             Option1Text.text = string.IsNullOrWhiteSpace(option1Id) ? string.Empty : StringUtils.Translate(option1Id);
             Option2Text.text = string.IsNullOrWhiteSpace(option2Id) ? string.Empty : StringUtils.Translate(option2Id);
+        }
+
+        /// <summary>
+        /// An event when the screen is faded.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="args">The event arguments.</param>
+        private void OnScreenFaded(object sender, EventArgs args)
+        {
+            LevelManager.Pause(false);
+            LevelManager.SetLevelId(levelToLoadId);
+            SceneManager.LoadScene("LevelScene");
         }
     }
 }
